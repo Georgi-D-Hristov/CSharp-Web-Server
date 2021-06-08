@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyWebServer.Server.Routing
 {
-    class RoutingTable
+    public class RoutingTable
     {
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MyWebServer.Server.Http;
+using MyWebServer.Server.Routing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,21 @@ namespace MyWebServer.Server
         private readonly TcpListener listener;
         private readonly int port;
 
-        public HttpServer(string ipAddress, int port)
+        public HttpServer(string ipAddress, int port, Action<IRoutingTable> routingTable)
         {
-            this.ipAddress = IPAddress.Parse("127.0.0.1");
-            this.port = 9090;
+            this.ipAddress = IPAddress.Parse(ipAddress);
+            this.port = port;
 
             listener = new TcpListener(this.ipAddress, this.port);
+        }
+        public HttpServer(int port, Action<IRoutingTable> routingTable) :this("127.0.0.1", port, routingTable)
+        {
+        }
+
+        public HttpServer(Action<IRoutingTable> routingTable)
+            :this(9090, routingTable)
+        {
+
         }
 
         public async Task Start()

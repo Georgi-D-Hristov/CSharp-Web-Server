@@ -20,6 +20,26 @@ namespace MyWebServer.Server.Http
 
         public HttpHeaderCollection Headers { get; } = new HttpHeaderCollection();
 
-        public string Content { get; init }
+        public string Content { get; init; }
+
+        public override string ToString()
+        {
+            var result = new StringBuilder();
+
+            result.Append($"HTTP/1.1 {(int)this.StatusCode} {this.StatusCode}");
+
+            foreach (var header in Headers)
+            {
+                result.AppendLine(header.ToString());
+            }
+
+            if (!string.IsNullOrEmpty(this.Content))
+            {
+                result.AppendLine();
+                result.Append(this.Content);
+            }
+
+            return result.ToString();
+        }
     }
 }

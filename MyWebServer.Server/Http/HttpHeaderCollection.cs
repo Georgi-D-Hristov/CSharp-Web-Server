@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MyWebServer.Server.Http
 {
-    public class HttpHeaderCollection
+    public class HttpHeaderCollection : IEnumerable<HttpHeader>
     {
         private readonly Dictionary<string, HttpHeader> headers;
         public HttpHeaderCollection()
@@ -20,6 +22,11 @@ namespace MyWebServer.Server.Http
 
             this.headers.Add(name, header);
         }
+
+        public IEnumerator<HttpHeader> GetEnumerator()
+            => this.headers.Values.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator()
+            => this.GetEnumerator();
 
         public int Count => this.headers.Count();
     }

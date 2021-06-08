@@ -13,11 +13,15 @@ namespace MyWebServer.Server.Http
         {
             Gard.AgainstNull(name, nameof(name));
             Gard.AgainstNull(value, nameof(value));
+
             this.Name = name;
             this.Value = value;
         }
         public string Name { get; init; }
 
         public string Value { get; init; }
+
+        public override string ToString()
+            => $"{this.Name}: {this.Value}";
     }
 }
