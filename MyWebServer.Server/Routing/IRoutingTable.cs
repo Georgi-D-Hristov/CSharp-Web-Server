@@ -1,19 +1,11 @@
-﻿using MyWebServer.Server.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyWebServer.Server.Routing
+﻿namespace MyWebServer.Server.Routing
 {
+    using MyWebServer.Server.Http;
+
     public interface IRoutingTable
     {
-     
-
         IRoutingTable Map(string url, HttpRequestMethod method, HttpResponse response);
 
         IRoutingTable GetMap(string url, HttpResponse response);
-
     }
 }

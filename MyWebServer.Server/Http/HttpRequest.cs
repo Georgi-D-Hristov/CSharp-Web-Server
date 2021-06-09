@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyWebServer.Server.Http
+﻿namespace MyWebServer.Server.Http
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class HttpRequest
     {
         private const string NewLine = "\r\n";
@@ -51,9 +49,9 @@ namespace MyWebServer.Server.Http
                     break;
                 }
 
-                var headerParts = headerLine.Split(":",2);
+                var headerParts = headerLine.Split(":", 2);
 
-                if (headerParts.Length !=2)
+                if (headerParts.Length != 2)
                 {
                     throw new InvalidOperationException("Request is not valid!");
                 }
@@ -61,7 +59,7 @@ namespace MyWebServer.Server.Http
                 var headerName = headerParts[0];
                 var headerValue = headerParts[1].Trim();
 
-                
+
 
                 headerCollection.Add(headerName, headerValue);
             }
@@ -77,10 +75,10 @@ namespace MyWebServer.Server.Http
                 "POST" => HttpRequestMethod.POST,
                 "PUT" => HttpRequestMethod.PUT,
                 "DELETE" => HttpRequestMethod.DELETE,
-                 _=> throw new InvalidOperationException($"Method '{method}' is not supported!")
+                _ => throw new InvalidOperationException($"Method '{method}' is not supported!")
             };
         }
 
-       
+
     }
 }

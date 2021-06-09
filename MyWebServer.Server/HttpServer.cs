@@ -1,15 +1,13 @@
-﻿using MyWebServer.Server.Http;
-using MyWebServer.Server.Routing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyWebServer.Server
+﻿namespace MyWebServer.Server
 {
+    using System;
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using MyWebServer.Server.Routing;
+
     public class HttpServer
     {
         private readonly IPAddress ipAddress;
@@ -21,21 +19,20 @@ namespace MyWebServer.Server
             this.ipAddress = IPAddress.Parse(ipAddress);
             this.port = port;
 
-            listener = new TcpListener(this.ipAddress, this.port);
+            this.listener = new TcpListener(this.ipAddress, this.port);
         }
-        public HttpServer(int port, Action<IRoutingTable> routingTable) :this("127.0.0.1", port, routingTable)
+
+        public HttpServer(int port, Action<IRoutingTable> routingTable) : this("127.0.0.1", port, routingTable)
         {
         }
 
         public HttpServer(Action<IRoutingTable> routingTable)
-            :this(9090, routingTable)
+            : this(9090, routingTable)
         {
-
         }
 
         public async Task Start()
         {
-
             this.listener.Start();
 
             Console.WriteLine($"Server started on port {port}...");
@@ -43,7 +40,6 @@ namespace MyWebServer.Server
 
             do
             {
-
                 var connection = await this.listener.AcceptTcpClientAsync();
 
                 var networkStream = connection.GetStream();
@@ -52,15 +48,12 @@ namespace MyWebServer.Server
 
                 Console.WriteLine(requestText);
 
-                //var request = HttpRequest.Parse(requestText);
-
+                ////var request = HttpRequest.Parse(requestText);
                 await WriteResponse(networkStream);
 
                 connection.Close();
-
-            } while (true);
-
-
+            } 
+            while (true);
         }
 
         private static async Task WriteResponse(NetworkStream networkStream)
@@ -103,7 +96,7 @@ Content-Type: text/html; charset=utf-8
 
                 totalByts += byteRead;
 
-                if (totalByts>10*1024)
+                if (totalByts > 10 * 1024)
                 {
                     throw new InvalidOperationException("Request is too large.");
                 }

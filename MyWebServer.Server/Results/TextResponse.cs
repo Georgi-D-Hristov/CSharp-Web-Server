@@ -1,16 +1,11 @@
-﻿using MyWebServer.Server.Common;
-using MyWebServer.Server.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyWebServer.Server.Results
+﻿namespace MyWebServer.Server.Results
 {
+    using System.Text;
+    using MyWebServer.Server.Common;
+    using MyWebServer.Server.Http;
+
     public class TextResponse : HttpResponse
     {
-       
         public TextResponse(string text, string contentType)
             : base(HttpStatusCode.OK)
         {
@@ -22,7 +17,6 @@ namespace MyWebServer.Server.Results
             this.Headers.Add("Content-Length", contentLength);
 
             this.Content = text;
-
         }
 
         public TextResponse(string text)

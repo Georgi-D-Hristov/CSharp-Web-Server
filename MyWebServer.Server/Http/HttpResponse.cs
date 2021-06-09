@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyWebServer.Server.Http
+﻿namespace MyWebServer.Server.Http
 {
+    using System;
+    using System.Text;
+
     public abstract class HttpResponse
     {
         public HttpResponse(HttpStatusCode statusCode)
